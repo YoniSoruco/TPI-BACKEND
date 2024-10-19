@@ -2,7 +2,9 @@ package frc.utn.TPI_Backend.PruebasAgencia.models;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -25,8 +27,10 @@ public class Prueba {
     @JoinColumn(name = "ID_EMPLEADO")
     private Empleado empleado;
 
+
     @Column(name = "FECHA_HORA_INICIO")
     private String fechaHoraInicio;
+
 
     @Column(name = "FECHA_HORA_FIN")
     private String fechaHoraFin;

@@ -2,6 +2,8 @@ package frc.utn.TPI_Backend.PruebasAgencia.models;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
+
 @Entity
 @Table(name = "Posiciones")
 public class Posicion {
