@@ -1,14 +1,22 @@
 package frc.utn.TPI_Backend.PruebasAgencia.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "Empleados")
 public class Empleado {
     @Id
-    @Column(name = "ID")
+    @Column(name = "LEGAJO")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int legajo;
+
+    @Column(name = "NOMBRE")
+    private String nombre;
+
+    @Column(name = "APELLIDO")
+    private String apellido;
+
+    @Column(name = "TELEFONO_CONTACTO")
+    private int telefono;
 
 }

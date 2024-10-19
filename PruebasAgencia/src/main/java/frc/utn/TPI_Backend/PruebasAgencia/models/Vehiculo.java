@@ -12,7 +12,16 @@ public class Vehiculo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(name = "PATENTE")
+    private String patente;
 
-    @OneToMany(mappedBy = "vehiculo")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID_MODELO",referencedColumnName = "ID")
+    private Modelo modelo;
+
+    @OneToMany(mappedBy = "vehiculo",fetch = FetchType.LAZY)
     private List<Prueba> prueba;
+
+    @OneToMany(mappedBy = "vehiculo",fetch = FetchType.LAZY)
+    private List<Posicion> posiciones;
 }
