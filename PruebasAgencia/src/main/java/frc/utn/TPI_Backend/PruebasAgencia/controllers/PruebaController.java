@@ -23,7 +23,7 @@ public class PruebaController {
         this.service=service;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<Iterable<Prueba>> getAllPruebas(){
         return ResponseEntity.ok(service.getAll());
     }
