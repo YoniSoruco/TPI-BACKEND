@@ -24,4 +24,29 @@ public class Vehiculo {
 
     @OneToMany(mappedBy = "vehiculo",fetch = FetchType.LAZY)
     private List<Posicion> posiciones;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPatente() {
+        return patente;
+    }
+
+    public void setPatente(String patente) {
+        this.patente = patente;
+    }
+
+    public Modelo getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(Modelo modelo) {
+        this.modelo = modelo;
+    }
+
 }
