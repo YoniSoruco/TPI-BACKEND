@@ -3,10 +3,12 @@ package frc.utn.TPI_Backend.Pruebas.models;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import frc.utn.TPI_Backend.Pruebas.dto.VehiculoDTO;
 import jakarta.persistence.*;
+import lombok.Data;
 
 
 @Entity
 @Table(name = "Pruebas")
+@Data
 public class Prueba {
     @Id
     @Column(name = "ID")
@@ -14,7 +16,8 @@ public class Prueba {
     private int id;
 
 
-    private VehiculoDTO vehiculo;
+    @Column(name = "ID_VEHICULO")
+    private int idVehiculo;
 
     @ManyToOne
     @JoinColumn(name = "ID_INTERESADO")
@@ -35,69 +38,4 @@ public class Prueba {
     @Column(name = "COMENTARIOS")
     private String comentario;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public VehiculoDTO getVehiculo() {
-        return vehiculo;
-    }
-
-    public void setVehiculo(VehiculoDTO vehiculo) {
-        this.vehiculo = vehiculo;
-    }
-
-    public Interesado getInteresado() {
-        return interesado;
-    }
-
-    public void setInteresado(Interesado interesado) {
-        this.interesado = interesado;
-    }
-
-    public Empleado getEmpleado() {
-        return empleado;
-    }
-
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
-    }
-
-    public String getFechaHoraInicio() {
-        return fechaHoraInicio;
-    }
-
-    public void setFechaHoraInicio(String fechaHoraInicio) {
-        this.fechaHoraInicio = fechaHoraInicio;
-    }
-
-    public String getFechaHoraFin() {
-        return fechaHoraFin;
-    }
-
-    public void setFechaHoraFin(String fechaHoraFin) {
-        this.fechaHoraFin = fechaHoraFin;
-    }
-
-    public String getComentario() {
-        return comentario;
-    }
-
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
-
-    @Override
-    public String toString() {
-        return "Prueba{" +
-                "id=" + id +
-                ", fechaHoraInicio='" + fechaHoraInicio + '\'' +
-                ", fechaHoraFin='" + fechaHoraFin + '\'' +
-                ", comentario='" + comentario + '\'' +
-                '}';
-    }
 }

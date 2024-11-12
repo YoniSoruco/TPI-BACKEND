@@ -8,15 +8,15 @@ public class VehiculoDTO {
 
     private int id;
     private String patente;
-    private String modeloDescripcion;
-    private String marcaNombre;
+    private String modelo;
+    private String marca;
 
 
-    public VehiculoDTO(int id, String patente, String modeloDescripcion, String marcaNombre) {
+    public VehiculoDTO(int id, String patente, String modelo, String marca) {
         this.id = id;
         this.patente = patente;
-        this.modeloDescripcion = modeloDescripcion;
-        this.marcaNombre = marcaNombre;
+        this.modelo = modelo;
+        this.marca = marca;
 
     }
 

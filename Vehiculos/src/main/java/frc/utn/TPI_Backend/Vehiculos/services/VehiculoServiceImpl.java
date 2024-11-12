@@ -54,6 +54,7 @@ public class VehiculoServiceImpl extends ServiceImpl<Vehiculo,Integer> implement
                 vehiculo.getPatente(),
                 vehiculo.getModelo().getDescripcion(),
                 vehiculo.getModelo().getMarca().getNombre()
+
         );
     }
 

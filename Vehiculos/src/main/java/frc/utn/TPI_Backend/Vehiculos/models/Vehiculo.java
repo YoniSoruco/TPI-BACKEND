@@ -23,9 +23,6 @@ public class Vehiculo {
     @JoinColumn(name = "ID_MODELO",referencedColumnName = "ID")
     private Modelo modelo;
 
-
-    private List<PruebaDTO> prueba;
-
     @OneToMany(mappedBy = "vehiculo",fetch = FetchType.LAZY)
     @JsonBackReference
     private List<Posicion> posiciones;

@@ -1,9 +1,11 @@
 package frc.utn.TPI_Backend.Vehiculos.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "Modelos")
+@Data
 public class Modelo {
 
     @Id
@@ -18,27 +20,5 @@ public class Modelo {
     @Column(name = "DESCRIPCION")
     private String descripcion;
 
-    public Marca getMarca() {
-        return marca;
-    }
 
-    public void setMarca(Marca marca) {
-        this.marca = marca;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    @Override
-    public String toString() {
-        return "Modelo{" +
-                "marca=" + marca +
-                ", descripcion='" + descripcion + '\'' +
-                '}';
-    }
 }

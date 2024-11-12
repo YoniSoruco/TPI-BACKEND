@@ -1,9 +1,12 @@
 package frc.utn.TPI_Backend.Pruebas.services;
 
+import frc.utn.TPI_Backend.Pruebas.dto.PruebaDTO;
 import frc.utn.TPI_Backend.Pruebas.dto.VehiculoDTO;
 import frc.utn.TPI_Backend.Pruebas.models.Prueba;
 import frc.utn.TPI_Backend.Pruebas.repositories.PruebaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import frc.utn.TPI_Backend.Pruebas.exceptions.ResourceNotFoundException;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -29,8 +32,25 @@ public class PruebaService {
         return repository.findAll();
     }
 
+    public PruebaDTO getPruebaById(int id){
+        Prueba prueba = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No se encontro la Prueba con ese id: "+ id));
 
-    public VehiculoDTO obtenerVehiculoPorId(Long vehiculoId) {
+
+
+        VehiculoDTO vehiculoDTO = obtenerVehiculoPorId(id);
+
+        return new PruebaDTO(
+                prueba.getId(),
+                vehiculoDTO,
+                prueba.getInteresado(),
+                prueba.getEmpleado(),
+                prueba.getFechaHoraInicio(),
+                prueba.getFechaHoraFin(),
+                prueba.getComentario()
+        );
+    }
+
+    public VehiculoDTO obtenerVehiculoPorId(int vehiculoId) {
         String url = VEHICULOS_API_URL + "/" + vehiculoId;
         return restTemplate.getForObject(url, VehiculoDTO.class);
     }
