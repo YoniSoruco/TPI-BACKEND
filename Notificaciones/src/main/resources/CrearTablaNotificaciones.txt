@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS Notificaciones (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    vehiculo_id INTEGER,
+    mensaje TEXT NOT NULL,
+    fecha_hora DATETIME NOT NULL,
+    tipo TEXT NOT NULL,
+    FOREIGN KEY (vehiculo_id) REFERENCES vehiculos(id)
+);

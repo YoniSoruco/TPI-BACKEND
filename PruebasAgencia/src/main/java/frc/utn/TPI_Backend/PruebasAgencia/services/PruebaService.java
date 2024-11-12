@@ -16,6 +16,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Optional;
 
 
 
@@ -81,6 +83,24 @@ public class PruebaService {
 
         return true;
     }
+
+    public List<Prueba> obtenerPruebasActivas() {
+        return pruebaRepository.findByFechaHoraFin("ACTIVA");
+    }
+
+    public boolean finalizarPrueba(int idPrueba, String comentario) {
+        Optional<Prueba> pruebaOpt = pruebaRepository.findById(idPrueba);
+        if (pruebaOpt.isPresent()) {
+            Prueba prueba = pruebaOpt.get();
+            prueba.setFechaHoraFin(LocalDateTime.now().toString()); // Fecha actual
+            prueba.setComentario(comentario);
+            pruebaRepository.save(prueba); // Guardamos los cambios
+            return true;
+        } else {
+            return false; // No se encontró la prueba con el ID proporcionado
+        }
+    }
+
     public Iterable<Prueba> getAll() {
         return pruebaRepository.findAll();
     }
