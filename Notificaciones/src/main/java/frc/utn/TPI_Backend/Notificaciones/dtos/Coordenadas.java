@@ -1,4 +1,4 @@
-package frc.utn.TPI_Backend.Vehiculos.dto;
+package frc.utn.TPI_Backend.Notificaciones.dtos;
 
 import lombok.Data;
 
@@ -8,3 +8,4 @@ public class Coordenadas {
     private double lat;
     private double lon;
 }
+
