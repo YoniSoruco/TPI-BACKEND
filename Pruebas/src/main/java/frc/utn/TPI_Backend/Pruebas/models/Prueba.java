@@ -5,6 +5,8 @@ import frc.utn.TPI_Backend.Pruebas.dto.VehiculoDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "Pruebas")
@@ -28,12 +30,12 @@ public class Prueba {
     private Empleado empleado;
 
 
-    @Column(name = "FECHA_HORA_INICIO")
-    private String fechaHoraInicio;
+    @Column(name = "FECHA_HORA_INICIO" , columnDefinition = "TIMESTAMP")
+    private LocalDateTime fechaHoraInicio;
 
 
-    @Column(name = "FECHA_HORA_FIN")
-    private String fechaHoraFin;
+    @Column(name = "FECHA_HORA_FIN", columnDefinition = "TIMESTAMP")
+    private LocalDateTime fechaHoraFin;
 
     @Column(name = "COMENTARIOS")
     private String comentario;

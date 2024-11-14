@@ -3,6 +3,8 @@ package frc.utn.TPI_Backend.Pruebas.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "Interesados")
 @Data
@@ -30,7 +32,7 @@ public class Interesado {
     @Column(name = "NRO_LICENCIA")
     private int nroLicencia;
 
-    @Column(name = "FECHA_VENCIMIENTO_LICENCIA")
-    private String fechaVencLic;
+    @Column(name = "FECHA_VENCIMIENTO_LICENCIA", columnDefinition = "TIMESTAMP")
+    private LocalDateTime fechaVencLic;
 
 }

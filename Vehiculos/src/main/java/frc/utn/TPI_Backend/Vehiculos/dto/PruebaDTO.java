@@ -13,6 +13,7 @@ public class PruebaDTO {
     private DateFormat fechaHoraInicio;
     private DateFormat fechaHoraFin;
     private String comentarios;
+
     public PruebaDTO(int id, int idVehiculo, int idInteresado, int idEmpleado, DateFormat fechaHoraInicio, DateFormat fechaHoraFin, String comentarios) {
         this.id = id;
         this.idVehiculo = idVehiculo;

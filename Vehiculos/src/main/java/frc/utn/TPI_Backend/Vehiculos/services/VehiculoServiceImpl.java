@@ -1,5 +1,6 @@
 package frc.utn.TPI_Backend.Vehiculos.services;
 
+import frc.utn.TPI_Backend.Vehiculos.dto.AgenciaDTO;
 import frc.utn.TPI_Backend.Vehiculos.dto.VehiculoDTO;
 
 import frc.utn.TPI_Backend.Vehiculos.models.Vehiculo;
@@ -14,21 +15,27 @@ import java.util.List;
 @Service
 public class VehiculoServiceImpl extends ServiceImpl<Vehiculo,Integer> implements VehiculoService {
 
-
-
     @Autowired
     private final VehiculoRepository vehiculoRepository;
+
+    String URL_API_ZONAS_RESTRINGIDAS = "https://labsys.frc.utn.edu.ar/apps-disponibilizadas/backend/api/v1/configuracion/";
+
+    @Autowired
+    RestTemplate restTemplate;
 
     public VehiculoServiceImpl(VehiculoRepository vehiculoRepository){
         this.vehiculoRepository = vehiculoRepository;
     }
 
-    RestTemplate restTemplate;
+    public AgenciaDTO obtenerDatos(){
+        AgenciaDTO response = restTemplate.getForObject(URL_API_ZONAS_RESTRINGIDAS,AgenciaDTO.class);
+        return response;
+    }
 
 
 
     public void agregarPrueba(Vehiculo nueva){
-        vehiculoRepository.save(nueva);
+        this.vehiculoRepository.save(nueva);
     }
 
 
