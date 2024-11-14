@@ -1,8 +1,7 @@
 package frc.utn.TPI_Backend.Vehiculos.services;
 
 import frc.utn.TPI_Backend.Vehiculos.dto.VehiculoDTO;
-import frc.utn.TPI_Backend.Vehiculos.models.Marca;
-import frc.utn.TPI_Backend.Vehiculos.models.Modelo;
+
 import frc.utn.TPI_Backend.Vehiculos.models.Vehiculo;
 import frc.utn.TPI_Backend.Vehiculos.repositories.VehiculoRepository;
 import frc.utn.TPI_Backend.Vehiculos.services.interfaces.VehiculoService;
@@ -15,24 +14,26 @@ import java.util.List;
 @Service
 public class VehiculoServiceImpl extends ServiceImpl<Vehiculo,Integer> implements VehiculoService {
 
+
+
+    @Autowired
     private final VehiculoRepository vehiculoRepository;
 
     public VehiculoServiceImpl(VehiculoRepository vehiculoRepository){
         this.vehiculoRepository = vehiculoRepository;
     }
 
-    private RestTemplate restTemplate;
+    RestTemplate restTemplate;
 
-    @Autowired
-    private VehiculoRepository repository;
+
 
     public void agregarPrueba(Vehiculo nueva){
-        repository.save(nueva);
+        vehiculoRepository.save(nueva);
     }
 
 
     public Iterable<Vehiculo> getAll() {
-        return repository.findAll();
+        return vehiculoRepository.findAll();
     }
 
     public VehiculoDTO obtenerVehiculoDTO(int id) {
