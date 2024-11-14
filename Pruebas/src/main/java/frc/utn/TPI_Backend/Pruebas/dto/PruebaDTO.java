@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class PruebaDTO {
-    private int id;
+
     private VehiculoDTO vehiculoDTO;
     private Interesado interesado;
     private Empleado empleado;
@@ -17,8 +17,8 @@ public class PruebaDTO {
     private String fechaHoraFin;
     private String comentario;
 
-    public PruebaDTO(int id, VehiculoDTO vehiculoDTO, Interesado interesado, Empleado empleado, String fechaHoraInicio, String fechaHoraFin, String comentario) {
-        this.id = id;
+    public PruebaDTO(VehiculoDTO vehiculoDTO, Interesado interesado, Empleado empleado, String fechaHoraInicio, String fechaHoraFin, String comentario) {
+
         this.vehiculoDTO = vehiculoDTO;
         this.interesado = interesado;
         this.empleado = empleado;
