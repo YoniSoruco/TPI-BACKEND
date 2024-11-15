@@ -4,10 +4,12 @@ import frc.utn.TPI_Backend.Pruebas.models.Prueba;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface PruebaRepository extends CrudRepository<Prueba,Integer> {
 
     @Query("SELECT p FROM Prueba p WHERE p.idVehiculo = :idVehiculo AND p.fechaHoraFin IS NULL")

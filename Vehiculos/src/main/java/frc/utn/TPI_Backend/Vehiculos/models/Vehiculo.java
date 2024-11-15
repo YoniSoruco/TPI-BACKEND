@@ -1,7 +1,6 @@
 package frc.utn.TPI_Backend.Vehiculos.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import frc.utn.TPI_Backend.Vehiculos.dto.PruebaDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 

@@ -19,7 +19,7 @@ public class Empleado {
     private String apellido;
 
     @Column(name = "TELEFONO_CONTACTO")
-    private int telefono;
+    private String telefono;
 
 
 }

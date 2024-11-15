@@ -1,9 +1,6 @@
 package frc.utn.TPI_Backend.Pruebas.services;
 
-import frc.utn.TPI_Backend.Pruebas.dto.PruebaDTO;
-import frc.utn.TPI_Backend.Pruebas.dto.RequestPruebaCreated;
-import frc.utn.TPI_Backend.Pruebas.dto.RequestPruebaFinalized;
-import frc.utn.TPI_Backend.Pruebas.dto.VehiculoDTO;
+import frc.utn.TPI_Backend.Pruebas.dto.*;
 import frc.utn.TPI_Backend.Pruebas.models.Empleado;
 import frc.utn.TPI_Backend.Pruebas.models.Interesado;
 import frc.utn.TPI_Backend.Pruebas.models.Prueba;
@@ -17,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +35,7 @@ public class PruebaService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final String VEHICULOS_API_URL = "http://localhost:8085/vehiculos"; // Reemplaza con la URL de vehiculos
+    private static final String VEHICULOS_API_URL = "http://localhost:8085/api/vehiculos"; // Reemplaza con la URL de vehiculos
 
 
     public void agregarPrueba(Prueba nueva) {
@@ -55,15 +53,16 @@ public class PruebaService {
 
 
 
-        VehiculoDTO vehiculoDTO = obtenerVehiculoPorId(id);
-
+        VehiculoDTO vehiculoDTO = obtenerVehiculoPorId(prueba.getIdVehiculo());
+        InteresadoDTO interesadoDTO = convertInteresadoToDTO(prueba);
+        EmpleadoDTO empleadoDTO = convertEmpleadoToDTO(prueba);
         return new PruebaDTO(
 
                 vehiculoDTO,
-                prueba.getInteresado(),
-                prueba.getEmpleado(),
-                prueba.getFechaHoraInicio().toString(),
-                prueba.getFechaHoraFin().toString(),
+                interesadoDTO,
+                empleadoDTO,
+                prueba.getFechaHoraInicio(),
+                prueba.getFechaHoraFin(),
                 prueba.getComentario()
         );
     }
@@ -78,7 +77,9 @@ public class PruebaService {
 
         Interesado interesado = interesadoRepository.findById(pruebaNueva.getIdInteresado())
                 .orElseThrow(() -> new ResourceNotFoundException("Interesado no encontrado"));
-
+        System.out.println(interesado);
+        System.out.println(interesado.getFechaVencLic());
+        System.out.println(LocalDateTime.now());
         if(interesado.getFechaVencLic().isBefore(LocalDateTime.now())){
             throw new IllegalStateException("La licencia del Interesado está vencida");
         }
@@ -100,8 +101,9 @@ public class PruebaService {
         prueba.setInteresado(interesado);
         prueba.setFechaHoraInicio(LocalDateTime.now());
         prueba.setIdVehiculo(pruebaNueva.getIdVehiculo());
-        pruebaRepository.save(prueba);
 
+        prueba = pruebaRepository.save(prueba);
+        System.out.println("EL ID : "+prueba.getId());
         //deberia retornar el dto ?  - como obtengo el id? - sqlite_seq?
         return prueba;
 
@@ -109,21 +111,42 @@ public class PruebaService {
 
     public List<PruebaDTO> listarPruebasActivas(){
 
-
         return pruebaRepository.findAllActivePruebas()
                 .stream().map(this::covertToDTO).collect(Collectors.toList());
     }
 
+    public InteresadoDTO convertInteresadoToDTO(Prueba prueba){
+        return new InteresadoDTO(
+                        prueba.getInteresado().getId(),
+                        prueba.getInteresado().getTipoDoc(),
+                        prueba.getInteresado().getDocumento(),
+                        prueba.getInteresado().getNombre(),
+                        prueba.getInteresado().getApellido()
+
+                );
+    }
+
+    public EmpleadoDTO convertEmpleadoToDTO(Prueba prueba){
+        return new EmpleadoDTO(
+                prueba.getEmpleado().getLegajo(),
+                prueba.getEmpleado().getNombre(),
+                prueba.getEmpleado().getApellido(),
+                prueba.getEmpleado().getTelefono()
+        );
+    }
+
     public PruebaDTO covertToDTO(Prueba prueba){
-        VehiculoDTO vehiculoDTO = obtenerVehiculoPorId(prueba.getId());
+        VehiculoDTO vehiculoDTO = obtenerVehiculoPorId(prueba.getIdVehiculo());
+        InteresadoDTO interesadoDTO = convertInteresadoToDTO(prueba);
+        EmpleadoDTO empleadoDTO = convertEmpleadoToDTO(prueba);
 
         return new PruebaDTO(
 
                 vehiculoDTO,
-                prueba.getInteresado(),
-                prueba.getEmpleado(),
-                prueba.getFechaHoraInicio().toString(),
-                prueba.getFechaHoraFin().toString(),
+                interesadoDTO,
+                empleadoDTO,
+                prueba.getFechaHoraInicio(),
+                prueba.getFechaHoraFin(),
                 prueba.getComentario()
         );
     }

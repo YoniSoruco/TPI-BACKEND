@@ -1,10 +1,10 @@
-package frc.utn.TPI_Backend.Pruebas.dto;
-import com.fasterxml.jackson.annotation.JsonInclude;
+package frc.utn.TPI_Backend.Notificaciones.dtos;
+
 import lombok.Data;
+
 
 import java.time.LocalDateTime;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 public class PruebaDTO {
 

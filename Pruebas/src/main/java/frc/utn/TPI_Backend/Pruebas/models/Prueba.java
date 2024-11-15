@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import frc.utn.TPI_Backend.Pruebas.dto.VehiculoDTO;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.cglib.core.Local;
+import util.converter.TimestampConverter;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 
@@ -14,7 +17,7 @@ import java.time.LocalDateTime;
 public class Prueba {
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
 
@@ -30,11 +33,13 @@ public class Prueba {
     private Empleado empleado;
 
 
-    @Column(name = "FECHA_HORA_INICIO" , columnDefinition = "TIMESTAMP")
+    @Convert(converter = TimestampConverter.class)
+    @Column(name = "FECHA_HORA_INICIO" ,columnDefinition = "TEXT")
     private LocalDateTime fechaHoraInicio;
 
 
-    @Column(name = "FECHA_HORA_FIN", columnDefinition = "TIMESTAMP")
+    @Convert(converter = TimestampConverter.class)
+    @Column(name = "FECHA_HORA_FIN", columnDefinition = "TEXT")
     private LocalDateTime fechaHoraFin;
 
     @Column(name = "COMENTARIOS")

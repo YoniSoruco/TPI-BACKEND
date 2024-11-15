@@ -1,10 +1,16 @@
 package frc.utn.TPI_Backend.Vehiculos.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import frc.utn.TPI_Backend.Vehiculos.util.converter.TimestampConverter;
 import jakarta.persistence.*;
+import lombok.Data;
+
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Posiciones")
+@Data
 public class Posicion {
 
     @Id
@@ -17,62 +23,15 @@ public class Posicion {
     @JsonManagedReference
     private Vehiculo vehiculo;
 
-    @Column(name = "FECHA_HORA")
-    private String fechaHora;
+    @Convert(converter = TimestampConverter.class)
+    @Column(name = "FECHA_HORA",columnDefinition = "TEXT")
+    private LocalDateTime fechaHora;
 
     @Column(name = "LATITUD")
     private double latitud;
 
     @Column(name = "LONGITUD")
-    private int longitud;
+    private double longitud;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Vehiculo getVehiculo() {
-        return vehiculo;
-    }
-
-    public void setVehiculo(Vehiculo vehiculo) {
-        this.vehiculo = vehiculo;
-    }
-
-    public String getFechaHora() {
-        return fechaHora;
-    }
-
-    public void setFechaHora(String fechaHora) {
-        this.fechaHora = fechaHora;
-    }
-
-    public double getLatitud() {
-        return latitud;
-    }
-
-    public void setLatitud(double latitud) {
-        this.latitud = latitud;
-    }
-
-    public int getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(int longitud) {
-        this.longitud = longitud;
-    }
-
-    @Override
-    public String toString() {
-        return "Posicion{" +
-                "id=" + id +
-                ", fechaHora='" + fechaHora + '\'' +
-                ", latitud=" + latitud +
-                ", longitud=" + longitud +
-                '}';
-    }
 }

@@ -1,6 +1,7 @@
-package frc.utn.TPI_Backend.Vehiculos.dto;
+package frc.utn.TPI_Backend.Notificaciones.dtos;
 
 import lombok.Data;
+
 
 @Data
 public class VehiculoDTO {
@@ -22,3 +23,4 @@ public class VehiculoDTO {
     }
 
 }
+

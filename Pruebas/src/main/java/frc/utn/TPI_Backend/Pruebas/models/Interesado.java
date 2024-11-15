@@ -2,6 +2,7 @@ package frc.utn.TPI_Backend.Pruebas.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import util.converter.TimestampConverter;
 
 import java.time.LocalDateTime;
 
@@ -32,7 +33,8 @@ public class Interesado {
     @Column(name = "NRO_LICENCIA")
     private int nroLicencia;
 
-    @Column(name = "FECHA_VENCIMIENTO_LICENCIA", columnDefinition = "TIMESTAMP")
+    @Convert(converter = TimestampConverter.class)
+    @Column(name = "FECHA_VENCIMIENTO_LICENCIA", columnDefinition = "TEXT")
     private LocalDateTime fechaVencLic;
 
 }

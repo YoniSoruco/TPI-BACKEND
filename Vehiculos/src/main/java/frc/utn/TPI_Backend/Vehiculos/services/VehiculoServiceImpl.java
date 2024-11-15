@@ -1,40 +1,31 @@
 package frc.utn.TPI_Backend.Vehiculos.services;
 
-import frc.utn.TPI_Backend.Vehiculos.dto.AgenciaDTO;
+import frc.utn.TPI_Backend.Vehiculos.dto.PosicionDTO;
 import frc.utn.TPI_Backend.Vehiculos.dto.VehiculoDTO;
 
+import frc.utn.TPI_Backend.Vehiculos.models.Posicion;
 import frc.utn.TPI_Backend.Vehiculos.models.Vehiculo;
+import frc.utn.TPI_Backend.Vehiculos.repositories.PosicionRepository;
 import frc.utn.TPI_Backend.Vehiculos.repositories.VehiculoRepository;
-import frc.utn.TPI_Backend.Vehiculos.services.interfaces.VehiculoService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
 
 @Service
-public class VehiculoServiceImpl extends ServiceImpl<Vehiculo,Integer> implements VehiculoService {
+public class VehiculoServiceImpl {
 
     @Autowired
     private final VehiculoRepository vehiculoRepository;
 
-    String URL_API_ZONAS_RESTRINGIDAS = "https://labsys.frc.utn.edu.ar/apps-disponibilizadas/backend/api/v1/configuracion/";
-
     @Autowired
-    RestTemplate restTemplate;
+    private final PosicionRepository posicionRepository;
 
-    public VehiculoServiceImpl(VehiculoRepository vehiculoRepository){
+    public VehiculoServiceImpl(VehiculoRepository vehiculoRepository, PosicionRepository posicionRepository){
         this.vehiculoRepository = vehiculoRepository;
+        this.posicionRepository = posicionRepository;
     }
 
-    public AgenciaDTO obtenerDatos(){
-        AgenciaDTO response = restTemplate.getForObject(URL_API_ZONAS_RESTRINGIDAS,AgenciaDTO.class);
-        return response;
-    }
-
-
-
-    public void agregarPrueba(Vehiculo nueva){
+    public void agregarVehiculo(Vehiculo nueva){
         this.vehiculoRepository.save(nueva);
     }
 
@@ -47,55 +38,24 @@ public class VehiculoServiceImpl extends ServiceImpl<Vehiculo,Integer> implement
         Vehiculo vehiculo = this.vehiculoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Vehículo no encontrado con ID: " + id));
 
-/*
-        // Obtener el modelo del vehículo
-        Modelo modelo = modeloRepository.findById(vehiculo.getIdModelo())
-                .orElseThrow(() -> new RuntimeException("Modelo no encontrado con ID: " + vehiculo.getIdModelo()));
+        Posicion ultimaPosicion = this.posicionRepository.findUltimaPosicionVehiculo(vehiculo.getId());
 
-        // Obtener la marca del modelo
-        Marca marca = marcaRepository.findById(modelo.getIdMarca())
-                .orElseThrow(() -> new RuntimeException("Marca no encontrada con ID: " + modelo.getIdMarca()));
-*/
-        // Construir y retornar el DTO
+        PosicionDTO ultimaPosicionDTO = new PosicionDTO(
+                ultimaPosicion.getFechaHora(),
+                ultimaPosicion.getLatitud(),
+                ultimaPosicion.getLongitud()
+                );
+
         return new VehiculoDTO(
                 vehiculo.getId(),
                 vehiculo.getPatente(),
                 vehiculo.getModelo().getDescripcion(),
-                vehiculo.getModelo().getMarca().getNombre()
+                vehiculo.getModelo().getMarca().getNombre(),
+                ultimaPosicionDTO
 
         );
     }
 
-    @Override
-    public void create(Vehiculo entity) {
-        this.vehiculoRepository.save(entity);
-    }
 
-    @Override
-    public void update(Vehiculo entity) {
-        this.vehiculoRepository.save(entity);
-    }
 
-    @Override
-    public Vehiculo delete(Integer id) {
-        Vehiculo vehiculo = findById(id);
-        this.vehiculoRepository.delete(vehiculo);
-        return vehiculo;
-    }
-
-    @Override
-    public Vehiculo findById(Integer id) {
-
-        return this.vehiculoRepository.findById(id).orElseThrow();
-    }
-
-    @Override
-    public List<Vehiculo> findAll() {
-        return (List<Vehiculo>) this.vehiculoRepository.findAll();
-    }
-
-    @Override
-    public boolean exists(Integer id) {
-        return false;
-    }
 }
