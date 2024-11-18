@@ -33,5 +33,13 @@ public class Posicion {
     @Column(name = "LONGITUD")
     private double longitud;
 
-
+    @Override
+    public String toString() {
+        return "Posicion{" +
+                "fechaHora=" + fechaHora +
+                ", latitud=" + latitud +
+                ", longitud=" + longitud +
+                ", id=" + id +
+                '}';
+    }
 }

@@ -1,13 +1,9 @@
 package frc.utn.TPI_Backend.Pruebas.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import frc.utn.TPI_Backend.Pruebas.dto.VehiculoDTO;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.cglib.core.Local;
 import util.converter.TimestampConverter;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 

@@ -1,20 +1,21 @@
 package frc.utn.TPI_Backend.Vehiculos.controllers;
 
-import frc.utn.TPI_Backend.Vehiculos.dto.VehiculoDTO;
+import frc.utn.TPI_Backend.Vehiculos.dtos.VehiculoDTO;
 import frc.utn.TPI_Backend.Vehiculos.models.Vehiculo;
 import frc.utn.TPI_Backend.Vehiculos.services.VehiculoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/api/vehiculos")
-public class VehiculoController {
+import java.time.LocalDateTime;
 
+@RestController
+@RequestMapping("/protegido-vehiculos")
+public class ProtegidoVehiculoController {
     private VehiculoServiceImpl vehiculoService;
 
     @Autowired
-    public VehiculoController(VehiculoServiceImpl vehiculoService){
+    public ProtegidoVehiculoController(VehiculoServiceImpl vehiculoService){
         this.vehiculoService = vehiculoService;
     }
 
@@ -28,5 +29,8 @@ public class VehiculoController {
         return vehiculoService.obtenerVehiculoDTO(id);
     }
 
-
+    @GetMapping("/posiciones")
+    private VehiculoDTO obtenerVehiculoConPos(@RequestParam int idVehiculo, @RequestParam LocalDateTime fechaInicio, @RequestParam(required = false) LocalDateTime fechaFin){
+        return vehiculoService.obtenerVehiculoConPos(idVehiculo,fechaInicio,fechaFin);
+    }
 }

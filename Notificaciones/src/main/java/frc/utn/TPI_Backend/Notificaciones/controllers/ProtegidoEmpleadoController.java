@@ -5,21 +5,20 @@ import frc.utn.TPI_Backend.Notificaciones.dtos.NotificacionDTO;
 import frc.utn.TPI_Backend.Notificaciones.services.NotificacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/notificaciones")
-public class NotificacionController {
-
-
+@RequestMapping("/protegido-empleados")
+public class ProtegidoEmpleadoController {
     private NotificacionService notificacionService;
+
     @Autowired
-    public NotificacionController(NotificacionService notificacionService){
+    public ProtegidoEmpleadoController(NotificacionService notificacionService){
         this.notificacionService = notificacionService;
     }
 
@@ -30,8 +29,8 @@ public class NotificacionController {
     }
 
 
-    @GetMapping("")
-    private List<NotificacionDTO> notificar(){
-        return notificacionService.notificar();
+    @GetMapping("/notificar")
+    private List<NotificacionDTO> notificar(Authentication authentication){
+        return notificacionService.notificar(authentication);
     }
 }

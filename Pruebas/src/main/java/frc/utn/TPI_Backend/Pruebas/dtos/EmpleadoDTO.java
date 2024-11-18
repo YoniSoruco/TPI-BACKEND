@@ -1,4 +1,4 @@
-package frc.utn.TPI_Backend.Pruebas.dto;
+package frc.utn.TPI_Backend.Pruebas.dtos;
 
 import lombok.Data;
 

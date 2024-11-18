@@ -3,6 +3,7 @@ package frc.utn.TPI_Backend.Vehiculos.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+
 @Entity
 @Table(name = "Marcas")
 @Data

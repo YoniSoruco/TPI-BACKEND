@@ -1,9 +1,8 @@
-package frc.utn.TPI_Backend.Notificaciones.dtos;
+package frc.utn.TPI_Backend.Vehiculos.dtos;
 
 import lombok.Data;
 
 import java.util.List;
-
 
 @Data
 public class VehiculoDTO {
@@ -13,6 +12,7 @@ public class VehiculoDTO {
     private String marca;
     private PosicionDTO ultimaPos;
     private List<PosicionDTO> posicionDTOS;
+
 
     public VehiculoDTO(int id, String patente, String modelo,String marca,PosicionDTO ultimaPos,List<PosicionDTO> posicionDTOS) {
         this.id = id;
@@ -29,6 +29,4 @@ public class VehiculoDTO {
 
     public VehiculoDTO() {
     }
-
 }
-

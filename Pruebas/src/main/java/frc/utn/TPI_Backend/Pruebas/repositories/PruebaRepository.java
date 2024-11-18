@@ -17,4 +17,7 @@ public interface PruebaRepository extends CrudRepository<Prueba,Integer> {
 
     @Query("SELECT p FROM Prueba p WHERE p.fechaHoraFin IS NULL")
     List<Prueba> findAllActivePruebas();
+
+    @Query("SELECT p FROM Prueba p WHERE p.idVehiculo = :idVehiculo ")
+    List<Prueba> findPruebasXVehiculos(@Param("idVehiculo") int idVehiculo);
 }

@@ -1,9 +1,8 @@
-package frc.utn.TPI_Backend.Notificaciones.dtos;
+package frc.utn.TPI_Backend.Pruebas.dtos;
 
 import lombok.Data;
 
 import java.util.List;
-
 
 @Data
 public class VehiculoDTO {
@@ -31,4 +30,6 @@ public class VehiculoDTO {
     }
 
 }
+
+
 
