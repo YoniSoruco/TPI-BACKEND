@@ -42,7 +42,7 @@ public class PruebaService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final String VEHICULOS_API_URL_PROTEGIDO = "http://localhost:8085/protegido-vehiculos"; // Reemplaza con la URL de vehiculos
+    private static final String VEHICULOS_API_URL_PROTEGIDO = "http://localhost:8085/api/vehiculos/protegido-vehiculos"; // Reemplaza con la URL de vehiculos
 
 
     public Iterable<Prueba> getAll() {

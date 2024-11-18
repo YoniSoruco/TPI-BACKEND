@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/protegido-administradores")
+@RequestMapping("/api/notificaciones/protegido-administradores")
 public class ProtegidoAdminController {
 
     private NotificacionService notificacionService;

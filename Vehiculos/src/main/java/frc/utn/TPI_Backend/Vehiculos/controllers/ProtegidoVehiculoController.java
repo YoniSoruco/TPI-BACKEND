@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 
 @RestController
-@RequestMapping("/protegido-vehiculos")
+@RequestMapping("/api/vehiculos/protegido-vehiculos")
 public class ProtegidoVehiculoController {
     private VehiculoServiceImpl vehiculoService;
 

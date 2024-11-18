@@ -26,8 +26,8 @@ public class NotificacionService {
     private NotificacionRepository notificacionRepository;
 
     private static final String URL_API_ZONAS_RESTRINGIDAS = "https://labsys.frc.utn.edu.ar/apps-disponibilizadas/backend/api/v1/configuracion/";
-    private static final String PRUEBAS_API_URL_PROTEGIDO_EMPLEADO = "http://localhost:8083/protegido-empleados";
-    private static final String PRUEBAS_API_URL_PUBLICO = "http://localhost:8083/publico";
+    private static final String PRUEBAS_API_URL_PROTEGIDO_EMPLEADO = "http://localhost:8083/api/pruebas/protegido-empleados";
+    private static final String PRUEBAS_API_URL_PUBLICO = "http://localhost:8083/api/pruebas/publico";
 
 
     @Autowired
